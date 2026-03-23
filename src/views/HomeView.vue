@@ -12,4 +12,7 @@
 
 <script setup lang="ts">
   import { RouterLink } from 'vue-router';
+  import { useRecipeStore } from '@/stores/recipe';
+
+  const recipeStore = useRecipeStore();
 </script>
