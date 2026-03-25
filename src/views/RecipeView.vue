@@ -3,6 +3,10 @@
         <h1>{{ recipe?.name }}</h1>
         <p>Ingredients: {{ recipe?.ingredients.join(', ') }}</p>
         <p>Instructions: {{ recipe?.instructions }}</p>
+        <div>
+            <router-link :to="{ name: 'edit-recipe', params: { id: recipeId } }">Edit</router-link>
+            <router-link :to="{ name: 'home' }">Back to Home</router-link>
+        </div>
     </div>
 </template>
 

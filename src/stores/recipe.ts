@@ -14,12 +14,21 @@ export const useRecipeStore = defineStore('recipe', () => {
   const recipes = ref<Recipe[]>([])
 
   const addRecipe = (recipe: RecipeState) => {
-    {
-        const newRecipe: Recipe = { id: Date.now().toString(), ...recipe };
-        recipes.value.push(newRecipe);
-        return newRecipe;
-    };
+    const newRecipe: Recipe = { id: Date.now().toString(), ...recipe };
+    recipes.value.push(newRecipe);
+    return newRecipe;
   }
+
+  const editRecipe = (recipe: Recipe) => {
+    const index = recipes.value.findIndex(r => r.id === recipe.id);
+    if (index !== -1) {
+      recipes.value[index] = recipe;
+    }
+    else {
+      throw new Error('Recipe not found');
+    }
+  }
+
 
   const getRecipeById = (id: string) => {
     return recipes.value.find(recipe => recipe.id === id);
@@ -30,5 +39,5 @@ export const useRecipeStore = defineStore('recipe', () => {
       recipe.name.toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase())
     );
 
-  return { recipes, addRecipe, getRecipeById, filteredRecipes };
+  return { recipes, addRecipe, editRecipe, getRecipeById, filteredRecipes };
 });
